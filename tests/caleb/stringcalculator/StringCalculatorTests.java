@@ -1,5 +1,6 @@
 package caleb.stringcalculator;
 
+import com.sun.tools.corba.se.idl.constExpr.Equal;
 import org.junit.Test;
 
 import java.util.AbstractCollection;
@@ -27,6 +28,16 @@ public class StringCalculatorTests {
     @Test public void returnsTheSumWhenTheStringContainsMoreThanTwoNumbers() {
         assertThat(new StringCalculator("1,2,3").add(), is(equalTo(6)));
         assertThat(new StringCalculator(oneHundredTwenties()).add(), is(equalTo(2000)));
+    }
+
+    @Test public void allowsTheNewlineAsADelimiter() {
+        assertThat(new StringCalculator("1\n2\n3").add(), is(equalTo(6)));
+        assertThat(new StringCalculator("4\n6,13").add(), is(equalTo(23)));
+    }
+
+    @Test public void allowsCustomDelimiters() {
+        assertThat(new StringCalculator("//;\n5;2;3").add(), is(equalTo(10)));
+        assertThat(new StringCalculator("//x\n6x3x10x23").add(), is(equalTo(42)));
     }
 
     private String oneHundredTwenties() {
