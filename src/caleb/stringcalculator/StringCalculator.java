@@ -12,25 +12,22 @@ public class StringCalculator {
         if ("".equals(string))
             return 0;
 
-        int value = 0;
+        int sum = 0;
         List<Integer> numbers = toNumbers(string);
-        for (Integer i : numbers) {
-            value += i;
+        for (Integer num : numbers) {
+            sum += num;
         }
 
-        return value;
+        return sum;
     }
     
     private static final List<Integer> toNumbers(String s) {
         List<Integer> list = new LinkedList<Integer>();
         for (String num : s.split(",")) {
-            list.add(toInt(num));
+            list.add(Integer.parseInt(num));
         }
 
         return list;
     }
 
-    private static final Integer toInt(String s) {
-        return Integer.parseInt(s);
-    }
 }
