@@ -1,6 +1,5 @@
 package caleb.stringcalculator;
 
-import java.nio.channels.Channel;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,37 @@ public class StringCalculator {
         if ("".equals(string))
             return 0;
 
+        throwIfNegatives();
+
         return addTheNumbers();
+    }
+
+    private void throwIfNegatives() {
+        List<Integer> negatives = negatives();
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException(formatExceptionMessage(negatives));
+        }
+    }
+
+    private String formatExceptionMessage(List<Integer> negatives) {
+        StringBuilder sb = new StringBuilder("Negatives not allowed: ");
+        for (int i=0; i<negatives.size()-1; i++) {
+            sb.append(negatives.get(i)).append(", ");
+        }
+        sb.append(negatives.get(negatives().size() - 1));
+
+        return sb.toString();
+    }
+
+    private List<Integer> negatives() {
+        List<Integer> negatives = new LinkedList<Integer>();
+        for (Integer num : toNumbers()) {
+            if (num < 0) {
+                negatives.add(num);
+            }
+        }
+        return negatives;
     }
 
     private int addTheNumbers() {
