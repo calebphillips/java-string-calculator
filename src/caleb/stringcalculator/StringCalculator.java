@@ -4,12 +4,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class StringCalculator {
-    public static Integer add(String s) {
-        if ("".equals(s))
+    private final String string;
+
+    public StringCalculator(String string) {this.string = string;}
+
+    public Integer add() {
+        if ("".equals(string))
             return 0;
 
         int value = 0;
-        List<Integer> numbers = toNumbers(s);
+        List<Integer> numbers = toNumbers(string);
         for (Integer i : numbers) {
             value += i;
         }

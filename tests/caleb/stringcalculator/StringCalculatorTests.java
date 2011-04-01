@@ -9,22 +9,22 @@ import static org.junit.Assert.assertThat;
 public class StringCalculatorTests {
     @Test
     public void returnsZeroForTheEmptyString() {
-        assertThat(StringCalculator.add(""), is(equalTo(0)));
+        assertThat(new StringCalculator("").add(), is(equalTo(0)));
     }
     
     @Test
     public void returnsTheNumberWhenTheStringConsistsOfASingleNumber() {
-        assertThat(StringCalculator.add("5"), is(equalTo(5)));
-        assertThat(StringCalculator.add("27"), is(equalTo(27)));
+        assertThat(new StringCalculator("5").add(), is(equalTo(5)));
+        assertThat(new StringCalculator("27").add(), is(equalTo(27)));
     }
 
     @Test public void returnsTheSumeWhenTheStringContainsTwoNumber() {
-        assertThat(StringCalculator.add("1,2"), is(equalTo(3)));
-        assertThat(StringCalculator.add("5,7"), is(equalTo(12)));
+        assertThat(new StringCalculator("1,2").add(), is(equalTo(3)));
+        assertThat(new StringCalculator("5,7").add(), is(equalTo(12)));
     }
 
     @Test public void returnsTheSumWhenTheStringContainsThreeNumbers() {
-        assertThat(StringCalculator.add("1,2,3"), is(equalTo(6)));
+        assertThat(new StringCalculator("1,2,3").add(), is(equalTo(6)));
     }
 
 }
