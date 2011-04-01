@@ -29,7 +29,7 @@ public class StringCalculator {
 
     private String formatExceptionMessage(List<Integer> negatives) {
         StringBuilder sb = new StringBuilder("Negatives not allowed: ");
-        for (int i=0; i<negatives.size()-1; i++) {
+        for (int i = 0; i < negatives.size() - 1; i++) {
             sb.append(negatives.get(i)).append(", ");
         }
         sb.append(negatives.get(negatives().size() - 1));
@@ -56,10 +56,8 @@ public class StringCalculator {
     }
 
     private final List<Integer> toNumbers() {
-        String withDelimitersReplaced = string.replace("\n", delimiter());
-
         List<Integer> list = new LinkedList<Integer>();
-        for (String num : withDelimitersReplaced.split(delimiter())) {
+        for (String num : string.replace("\n", delimiter()).split(delimiter())) {
             list.add(toInt(num));
         }
 
@@ -67,11 +65,15 @@ public class StringCalculator {
     }
 
     private String delimiter() {
-        if (string.startsWith("//")) {
-            return string.substring(2, 3);
-        }
+        return hasCustomDelimiter() ? customDelimiter() : ",";
+    }
 
-        return ",";
+    private String customDelimiter() {
+        return string.substring(2, 3);
+    }
+
+    private boolean hasCustomDelimiter() {
+        return string.startsWith("//");
     }
 
     private static final Integer toInt(String s) {
