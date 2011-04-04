@@ -1,5 +1,6 @@
 package caleb.stringcalculator;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,24 +21,26 @@ public class StringCalculator {
     }
 
     private void throwIfNegatives() {
-        List<Integer> negatives = negatives();
+        List<Integer> negatives = filterForNegativeNumbers();
 
         if (!negatives.isEmpty()) {
             throw new IllegalArgumentException(formatExceptionMessage(negatives));
         }
     }
 
-    private String formatExceptionMessage(List<Integer> negatives) {
+    private static String formatExceptionMessage(List<Integer> negatives) {
         StringBuilder sb = new StringBuilder("Negatives not allowed: ");
-        for (int i = 0; i < negatives.size() - 1; i++) {
-            sb.append(negatives.get(i)).append(", ");
+
+        for (Iterator<Integer> itr = negatives.iterator(); itr.hasNext();) {
+            sb.append(itr.next());
+
+            if (itr.hasNext()) sb.append(", ");
         }
-        sb.append(negatives.get(negatives().size() - 1));
 
         return sb.toString();
     }
 
-    private List<Integer> negatives() {
+    private List<Integer> filterForNegativeNumbers() {
         List<Integer> negatives = new LinkedList<Integer>();
         for (Integer num : toNumbers()) {
             if (num < 0) {
